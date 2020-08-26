@@ -15,5 +15,7 @@ namespace snakes
                 p.Draw();
             }
         }
+
+        public point GetNextPoint()
     }
 }
