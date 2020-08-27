@@ -7,8 +7,8 @@ namespace snakes
     {
         static void Main(string[] args)
         {
-            //object height = null;
-            //Console.SetWindowSize(80, 27);
+            object height = null;
+            Console.SetWindowSize(80, 27);
 
             VerticalLine v1 = new VerticalLine(0, 10, 5, '%');
             Draw(v1);

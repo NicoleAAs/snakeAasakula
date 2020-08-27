@@ -12,11 +12,11 @@ namespace snakes
         public point()
         {
         }
-        public point(int _x, int _y, char _sym)
+        public point(int x, int y, char sym)
         {
-            x = _x;
-            y = _y;
-            sym = _sym;
+            this.x = x;
+            this.y = y;
+            this.sym = sym;
         }
         public point (point p)
         {
