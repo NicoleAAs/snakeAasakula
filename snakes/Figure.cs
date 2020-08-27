@@ -8,7 +8,7 @@ namespace snakes
     {
         protected List<point> pList;
 
-        public void Drow()
+        public virtual void Draw()
         {
             foreach (point p in pList)
             {
@@ -16,7 +16,8 @@ namespace snakes
             }
         }
 
-        //public point GetNextPoint()
+		}
 
-    }
-}
+
+	}
+
