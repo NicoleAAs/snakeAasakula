@@ -43,6 +43,10 @@ namespace snakes
                 y = y + offset;
             }
         }
+        public bool IsHit(point p)
+        {
+            return p.x == this.x && p.y == this.y;
+        }
 
         //internal void Clear()
         //{

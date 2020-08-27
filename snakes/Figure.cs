@@ -16,7 +16,7 @@ namespace snakes
             }
         }
 
-        public point GetNextPoint()
+        //public point GetNextPoint()
 
     }
 }
