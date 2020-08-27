@@ -7,7 +7,10 @@ namespace snakes
     {
         static void Main(string[] args)
         {
-            Walls walls = new Walls(80, 25);
+			Console.Write("Write your name: ");
+			string name = Console.ReadLine();
+
+			Walls walls = new Walls(80, 25);
             walls.Draw();
 
 			// Отрисовка точек			
