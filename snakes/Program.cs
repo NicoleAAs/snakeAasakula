@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace snakes
 {
@@ -7,81 +8,88 @@ namespace snakes
     {
         static void Main(string[] args)
         {
-			Console.Write("Write your name: ");
-			string name = Console.ReadLine();
+            Console.Write("Write your name: ");
+            string name = Console.ReadLine();
 
-			Walls walls = new Walls(80, 25);
+            Walls walls = new Walls(80, 25);
             walls.Draw();
 
-			// Отрисовка точек			
-			point p = new point(4, 5, '*');
-			Snake snake = new Snake(p, 4, Direction.RIGHT);
-			snake.Draw();
+            // Отрисовка точек			
+            point p = new point(4, 5, '*');
+            Snake snake = new Snake(p, 4, Direction.RIGHT);
+            snake.Draw();
 
 
-			FoodCreator foodCreator = new FoodCreator(80, 25, '$');
-			point food = foodCreator.CreateFood();
-			food.Draw();
+            FoodCreator foodCreator = new FoodCreator(80, 25, '$');
+            point food = foodCreator.CreateFood();
+            food.Draw();
 
-			Params settings = new Params();
-			Sounds sound = new Sounds(settings.GetResourcesFolder());
-			sound.Play();
+            Params settings = new Params();
+            Sounds sound = new Sounds(settings.GetResourceFolder());
+            sound.Play();
 
-			Sounds sound1 = new Sounds(settings.GetResourcesFolder());
+            Sounds sound1 = new Sounds(settings.GetResourceFolder());
 
-			while (true)
-			{
-				if (walls.IsHit(snake) || snake.IsHitTail())
-				{
-					break;
-				}
-				if (snake.Eat(food))
-				{
-					food = foodCreator.CreateFood();
-					food.Draw();
-					sound1.PlayEat();
-				}
-				else
-				{
-					snake.Move();
-				}
+            while (true)
+            {
+                if (walls.IsHit(snake) || snake.IsHitTail())
+                {
+                    break;
+                }
+                if (snake.Eat(food))
+                {
+                    food = foodCreator.CreateFood();
+                    food.Draw();
+                    sound1.PlayEat();
+                }
+                else
+                {
+                    snake.Move();
+                }
 
-				System.Threading.Thread.Sleep(100);
-				if (Console.KeyAvailable)
-				{
-					ConsoleKeyInfo key = Console.ReadKey();
-					snake.HandleKey(key.Key);
-				}
-			}
-			sound.Stop();
-			WriteGameOver();
-			Console.ReadLine();
-		}
-		static void WriteGameOver()
-		{
-			Params settings = new Params();
-			Sounds sound2 = new Sounds(settings.GetResourcesFolder());
-			sound2.PlayNo();
-			Random rnd = new Random();
+                System.Threading.Thread.Sleep(100);
+                if (Console.KeyAvailable)
+                {
+                    ConsoleKeyInfo key = Console.ReadKey();
+                    snake.HandleKey(key.Key);
+                }
+            }
 
-			int xOffset = 25;
-			int yOffset = 8;
-			Console.ForegroundColor = ConsoleColor.Red;
-			Console.SetCursorPosition(xOffset, yOffset++);
-			
-			WriteText("Game Over", xOffset + 5, yOffset++);
-			yOffset++;
-			
-			
-		}
+            sound.Stop();
+            WriteGameOver(name, score);
+            Console.ReadLine();
+        }
+        static void WriteGameOver(string name, int score)
+        {
+            Params settings = new Params();
+            Sounds sound2 = new Sounds(settings.GetResourceFolder());
+            sound2.PlayNo();
+            Random rnd = new Random();
 
-		static void WriteText(String text, int xOffset, int yOffset)
-		{
-			Console.SetCursorPosition(xOffset, yOffset);
-			Console.WriteLine(text);
-		}
+            int xOffset = 25;
+            int yOffset = 8;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.SetCursorPosition(xOffset, yOffset++);
+            WriteText(" Your results: " + score, xOffset + 2, yOffset++);
+            Console.WriteLine(score);
+            using (var file = new StreamWriter("score.txt", true))
+            {
+                file.WriteLine("Name: " + name + " | Score:" + score);
+                file.Close();
+            }
+            WriteText("Game Over", xOffset + 5, yOffset++);
+            yOffset++;
 
-	}
+
+        }
+
+        static void WriteText(String text, int xOffset, int yOffset)
+        {
+            Console.SetCursorPosition(xOffset, yOffset);
+            Console.WriteLine(text);
+        }
+
+    }
 }
 
 

@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 
 namespace snakes
 {
     class Snake : Figure
     {
-         Direction direction;
+        Direction direction;
+        public int score;
+
+
         public Snake(point tail, int length, Direction _direction)
         {
             direction = _direction;
@@ -19,8 +23,9 @@ namespace snakes
                 pList.Add(p);
 
             }
+            score = 0;
         }
-        internal void Move()
+        public void Move()
         {
             point tail = pList.First();
             pList.Remove(tail);
@@ -40,7 +45,7 @@ namespace snakes
                     nextpoint.Move(1, direction);
                     return nextpoint;
                 }
-        internal bool IsHitTail()
+        public bool IsHitTail()
         {
             var head = pList.Last();
             for (int i = 0; i < pList.Count - 2; i++)
@@ -63,13 +68,14 @@ namespace snakes
             else if (key == ConsoleKey.UpArrow)
                 direction = Direction.UP;
         }
-        internal bool Eat ( point food )
+        public bool Eat ( point food )
         { 
         point head = GetNextPoint();
             if (head.IsHit(food ) )
             {
                 food.sym = head.sym;
                 pList.Add(food);
+                score++;
                 return true;
             }
             else

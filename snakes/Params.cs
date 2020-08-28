@@ -14,7 +14,7 @@ namespace snakes
             string binFolder = Directory.GetCurrentDirectory().ToString().ToString().Substring(0, ind).ToString();
             resourcesFolder = binFolder + "resorces\\";
         }
-        public string GetResourcesFolder()
+        public string GetResourceFolder()
         {
             return resourcesFolder;
         }

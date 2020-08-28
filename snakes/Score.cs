@@ -6,13 +6,13 @@ namespace snakes
 {
     class Score
 	{
-		public void ScoreInGame(int score)
+		public void ScoreInGame(int Score)
 		{
 
 			int xOffset = 0;
 			int yOffset = 25;
 			Console.SetCursorPosition(xOffset, yOffset);
-			WriteText("Очки: " + score, xOffset, yOffset);
+			WriteText("Score: " + Score, xOffset, yOffset);
 
 		}
 		
