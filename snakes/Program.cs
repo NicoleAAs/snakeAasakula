@@ -18,9 +18,16 @@ namespace snakes
 			Snake snake = new Snake(p, 4, Direction.RIGHT);
 			snake.Draw();
 
+
 			FoodCreator foodCreator = new FoodCreator(80, 25, '$');
 			point food = foodCreator.CreateFood();
 			food.Draw();
+
+			Params settings = new Params();
+			Sounds sound = new Sounds(settings.GetResourcesFolder());
+			sound.Play();
+
+			Sounds sound1 = new Sounds(settings.GetResourcesFolder());
 
 			while (true)
 			{
@@ -32,6 +39,7 @@ namespace snakes
 				{
 					food = foodCreator.CreateFood();
 					food.Draw();
+					sound1.PlayEat();
 				}
 				else
 				{
@@ -45,17 +53,23 @@ namespace snakes
 					snake.HandleKey(key.Key);
 				}
 			}
+			sound.Stop();
 			WriteGameOver();
 			Console.ReadLine();
 		}
 		static void WriteGameOver()
 		{
+			Params settings = new Params();
+			Sounds sound2 = new Sounds(settings.GetResourcesFolder());
+			sound2.PlayNo();
+			Random rnd = new Random();
+
 			int xOffset = 25;
 			int yOffset = 8;
 			Console.ForegroundColor = ConsoleColor.Red;
 			Console.SetCursorPosition(xOffset, yOffset++);
 			
-			WriteText("Game Over", xOffset + 1, yOffset++);
+			WriteText("Game Over", xOffset + 5, yOffset++);
 			yOffset++;
 			
 			

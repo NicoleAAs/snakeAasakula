@@ -15,7 +15,7 @@ namespace snakes
 			WriteText("Очки: " + score, xOffset, yOffset);
 
 		}
-
+		
 		public void WriteText(String text, int xOffset, int yOffset)
 		{
 			Console.SetCursorPosition(xOffset, yOffset);

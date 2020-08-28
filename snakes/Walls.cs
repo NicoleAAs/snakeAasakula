@@ -22,7 +22,7 @@ namespace snakes
             wallList.Add(leftLine);
             wallList.Add(rightLine);
         }
-
+        
         internal bool IsHit(Figure figure)
         {
             foreach (var wall in wallList)

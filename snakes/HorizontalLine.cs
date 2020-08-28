@@ -6,7 +6,7 @@ namespace snakes
 {
     class HorizontalLine : Figure
     {
-
+        
         public HorizontalLine(int xLeft, int xReight, int y, char sym)
         {
             pList = new List<point>();
